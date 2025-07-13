@@ -73,7 +73,7 @@ end
 
 
 local Bearing  = Screen:CreateElement('TextLabel', {AnchorPoint = Vector2.new(0.5,0.5);TextXAlignment = "Right";TextYAlignment = "Top";Position = UDim2.fromScale(0.925,0.165);Size = UDim2.fromScale(0.1,0.05);BackgroundTransparency = 1;BackgroundColor3 = Color3.new(0.174701, 0.382223, 0.162707);BorderSizePixel = 0;Rotation = 0;TextScaled = false;TextSize=10;Text = "BRG: 0";	TextColor3 = Color3.new(1, 1, 1);}) 
-local ResetButton = Screen:CreateElement('TextButton', {AnchorPoint = Vector2.new(0.5,0.5);Position = UDim2.fromScale(0.95,0.83);Size = UDim2.fromScale(0.05,0.05);BackgroundTransparency = 0.5;BackgroundColor3 = Color3.new(0.174701, 0.382223, 0.162707);BorderSizePixel = 0;Rotation = 0;TextScaled = true;Text = "RESET";TextColor3 = Color3.new(1, 1, 1)}) 
+local ResetButton = Screen:CreateElement('TextButton', {AnchorPoint = Vector2.new(0.5,0.5);Position = UDim2.fromScale(0.95,0.83);Size = UDim2.fromScale(0.05,0.05);BackgroundTransparency = 0.5;BackgroundColor3 = Color3.new(0.174701, 0.382223, 0.162707);BorderSizePixel = 0;Rotation = 0;TextScaled = true;Text = "INFO";TextColor3 = Color3.new(1, 1, 1)}) 
 local symbol = Screen:CreateElement('ImageLabel', {ImageColor3=Color3.new(0, 0, 0);AnchorPoint = Vector2.new(0.5,0.5);Position = UDim2.fromScale(0.95,0.10);Size = UDim2.fromScale(0.05,0.05);BackgroundTransparency = 0;BackgroundColor3 = Color3.fromRGB(199,212,228);BorderSizePixel = 0;Rotation = 0;Image="http://www.roblox.com/asset/?id=4597927207";}) 
 local element={}
 
@@ -120,7 +120,6 @@ local DevListed = {
 	["Hail12Pink"] = true;
 	["Weldify"] = true;
 	["Hexcede"] = true;
-	["evlynst1"] = true;
 }
 local GreenListed={
 	["ParagonOfSanguine"] = true;
@@ -305,7 +304,6 @@ end
 ResetButton.MouseButton1Click:Connect(function()
 	Beep(0.5)
 	print(`\nDebug:\nDelayTime: {(CPUTime2 - CPUTime1)/50}\nOwner: {Owner}\nVer{VersionNum}`)
-	LifeSensor = Screen
 end)
 
 task.spawn(cal)
