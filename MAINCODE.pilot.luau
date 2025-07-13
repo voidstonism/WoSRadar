@@ -1,6 +1,6 @@
 local Instrument=assert(GetPart("Instrument"),`Part "Instrument" appears to be missing, please check connections.`)
 local LifeSensor=assert(GetPart("LifeSensor"),`Part "LifeSensor" appears to be missing, please check connections.`)
-local Screen=assert(GetPart("Screen"),`Screen is not found/Screen is of incorrect type, please use part "Screen"`)
+local Screen=assert(GetPart("Screen") or GetPart("TouchScreen") ,`Screen is not found/Screen is of incorrect type, please use part "Screen"`)
 
 local SecondaryScreen=GetPartFromPort(2,"Screen") or nil
 local Sheild = GetPart("EnergyShield") or nil
@@ -9,17 +9,22 @@ Screen:ClearElements()
 
 local Radius = 2225
 local Diamater = Radius*2
-local VersionNum = "v3.8.2E"
+local VersionNum = "v3.8.3E"
 local PlayerService:Players = require("players")
 local OID = Screen:GetOwnerId()
 local Owner = PlayerService:GetUsername(OID)
 local CPUTime2 = pilot.getCPUTime()
 local CPUTime1 = pilot.getCPUTime()
+local UnitVariants = {
+	C = "C";
+	F = "F";
+}
+local UnitType = UnitVariants.F
 
 --[[
 REMEMBER: INTSTRUMENT UI MUST FACE FORWARD
 Writen by VO1D_STONE with player sorting system made by LuaBloxor. PowerGraph by ArvidSilverLocks
-Enchanced Greatly by ChatGPT
+Enchanced Greatly by ChatGPT (Efficiency Wise) (15-14 PPT) -> (7-8 PPT)
 
 Variant Naming
 E - Efficient
@@ -53,7 +58,7 @@ local Distance1000= Screen:CreateElement('TextLabel', {AnchorPoint = Vector2.new
 Distance1000.Parent = LifeSensorCircle2
 local Distance500= Screen:CreateElement('TextLabel', {AnchorPoint = Vector2.new(0.5,0.5);Position = UDim2.fromScale(0.5,1);Size = UDim2.fromScale(0.1,0.1);BackgroundTransparency = 1;BackgroundColor3 = Color3.new(0.174701, 0.382223, 0.162707);BorderSizePixel = 0;Rotation = 0;TextScaled = true;TextYAlignment = "Bottom";Text = "1000";TextColor3 = Color3.new(1, 1, 1);}) 
 Distance500.Parent = LifeSensorCircle3
-local TempUI = Screen:CreateElement('TextLabel', {AnchorPoint = Vector2.new(0.5,0.5);Position = UDim2.fromScale(0.25,0.75);Size = UDim2.fromScale(0.45,0.45);BackgroundTransparency = 1;BackgroundColor3 = Color3.new(0.174701, 0.382223, 0.162707);BorderSizePixel = 0;Rotation = 0;TextScaled = true;Text = "°F";	TextColor3 = Color3.new(1, 1, 1);}) 
+local TempUI = Screen:CreateElement('TextLabel', {AnchorPoint = Vector2.new(0.5,0.5);Position = UDim2.fromScale(0.25,0.75);Size = UDim2.fromScale(0.45,0.45);BackgroundTransparency = 1;BackgroundColor3 = Color3.new(0.174701, 0.382223, 0.162707);BorderSizePixel = 0;Rotation = 0;TextScaled = true;Text = `°{UnitType}`;	TextColor3 = Color3.new(1, 1, 1);}) 
 TempUI.Parent = Info
 
 local HPBarFrame
@@ -68,7 +73,7 @@ end
 
 
 local Bearing  = Screen:CreateElement('TextLabel', {AnchorPoint = Vector2.new(0.5,0.5);TextXAlignment = "Right";TextYAlignment = "Top";Position = UDim2.fromScale(0.925,0.165);Size = UDim2.fromScale(0.1,0.05);BackgroundTransparency = 1;BackgroundColor3 = Color3.new(0.174701, 0.382223, 0.162707);BorderSizePixel = 0;Rotation = 0;TextScaled = false;TextSize=10;Text = "BRG: 0";	TextColor3 = Color3.new(1, 1, 1);}) 
-local ResetButton = Screen:CreateElement('TextButton', {AnchorPoint = Vector2.new(0.5,0.5);Position = UDim2.fromScale(0.95,0.83);Size = UDim2.fromScale(0.05,0.05);BackgroundTransparency = 0.5;BackgroundColor3 = Color3.new(0.174701, 0.382223, 0.162707);BorderSizePixel = 0;Rotation = 0;TextScaled = true;Text = "Debug/Beep";TextColor3 = Color3.new(1, 1, 1)}) 
+local ResetButton = Screen:CreateElement('TextButton', {AnchorPoint = Vector2.new(0.5,0.5);Position = UDim2.fromScale(0.95,0.83);Size = UDim2.fromScale(0.05,0.05);BackgroundTransparency = 0.5;BackgroundColor3 = Color3.new(0.174701, 0.382223, 0.162707);BorderSizePixel = 0;Rotation = 0;TextScaled = true;Text = "RESET";TextColor3 = Color3.new(1, 1, 1)}) 
 local symbol = Screen:CreateElement('ImageLabel', {ImageColor3=Color3.new(0, 0, 0);AnchorPoint = Vector2.new(0.5,0.5);Position = UDim2.fromScale(0.95,0.10);Size = UDim2.fromScale(0.05,0.05);BackgroundTransparency = 0;BackgroundColor3 = Color3.fromRGB(199,212,228);BorderSizePixel = 0;Rotation = 0;Image="http://www.roblox.com/asset/?id=4597927207";}) 
 local element={}
 
@@ -80,7 +85,7 @@ if SecondaryScreen ~= nil then
 		BorderSizePixel = 0;
 		BackgroundColor3 = Color3.new(1, 0, 0);
 		BackgroundTransparency = 0.2;
-		Size = UDim2.fromScale(3,Length); -- crap
+		Size = UDim2.fromScale(3,Length);
 		Rotation = 360;
 	})
 
@@ -299,17 +304,17 @@ end
 
 ResetButton.MouseButton1Click:Connect(function()
 	Beep(0.5)
-	print(`\nDebug:\nDelayTime: {(CPUTime2 - CPUTime1)/50}\nOwner: {Owner}`)
+	print(`\nDebug:\nDelayTime: {(CPUTime2 - CPUTime1)/50}\nOwner: {Owner}\nVer{VersionNum}`)
+	LifeSensor = Screen
 end)
 
 task.spawn(cal)
 
---(CPUTime2 - CPUTime1)/50
 while task.wait((CPUTime2 - CPUTime1)/50) do
 	CPUTime1 = pilot.getCPUTime()
 	local currentpos = Instrument:GetReading("Position")
 	local currentOrientation = Instrument:GetReading("Orientation")
-	local currentTemp = math.round(Instrument:GetReading("AirTemperatureF"))
+	local currentTemp = math.round(Instrument:GetReading(`AirTemperature{UnitType}`))
 
 	ElevationReading.Text = math.round(currentpos.Y)
 	local theta = (currentOrientation.Y < 0) and (currentOrientation.Y % 360) or currentOrientation.Y
@@ -350,16 +355,17 @@ while task.wait((CPUTime2 - CPUTime1)/50) do
 		symbol.Rotation = currentOrientation.Y + 180
 
 		-- Temperature warning and color update
-		if currentTemp < 35 then
-			TempDisplay.TextColor3 = Color3.fromHSV(0.629722, math.max((currentTemp / 100) + 1.35, 0.8), 1)
-		elseif currentTemp > 120 then
-			Beep(math.clamp(currentTemp / 290, 0, 2))
+		local ConvertedF = Instrument:GetReading(`AirTemperatureF`)
+
+		if ConvertedF < 35 then
+			TempDisplay.TextColor3 = Color3.fromHSV(0.629722, math.max((ConvertedF / 100) + 1.35, 0.8), 1)
+		elseif ConvertedF > 120 then
+			Beep(math.clamp(ConvertedF / 290, 0, 2))
 			TempDisplay.TextColor3 = Color3.new(0.708461, 0.000244144, 0.0933852)
 		else
 			TempDisplay.TextColor3 = Color3.new(1, 1, 1)
 		end
 
-		-- Update player element position
 		element[player].Position = Position
 		CPUTime2 = pilot.getCPUTime()
 	end
