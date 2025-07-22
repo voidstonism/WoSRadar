@@ -22,7 +22,7 @@ local Error, Msg = pcall(function()
 		F = "F";
 	}
 	local UnitType = UnitVariants.F
-	local tickrate = 20 -- unstable runs on 10, stable is 1
+	local tickrate = 1 -- unstable runs on 10, stable is 1
 
 --[[
 REMEMBER: INTSTRUMENT UI MUST FACE FORWARD
@@ -265,7 +265,7 @@ L - Ultra down throttled for power presevation
 		local barFrames = {}
 		local lastPower = Instrument:GetReading("Power")
 
-		Instrument.Loop:Connect(function()
+		while wait(1) do
 			local currentPower = Instrument:GetReading("Power")
 			local powerChange = currentPower - lastPower
 
@@ -300,13 +300,13 @@ L - Ultra down throttled for power presevation
 			elseif powerChange > 0 then
 				PowerLeft.Text = "Charging"
 			end
-		end)
+		end
 	end
 
 
 	ResetButton.MouseButton1Click:Connect(function()
 		Beep(0.5)
-		print(`\nDebug:\nDelayTime: {(CPUTime2 - CPUTime1)/50}\nOwner: {Owner}\nVer{VersionNum}`)
+		print(`\nDebug:\nDelayTime: {(CPUTime2 - CPUTime1)/50}\nOwner: {Owner}\nVer{VersionNum}\nTICKRATE: {tickrate}`)
 	end)
 
 	task.spawn(cal)
