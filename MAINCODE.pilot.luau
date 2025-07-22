@@ -11,7 +11,7 @@ local Error, Msg = pcall(function()
 
 	local Radius = 2225
 	local Diamater = Radius*2
-	local VersionNum = "v3.9E"
+	local VersionNum = "v3.9.5"
 	local PlayerService:Players = require("players")
 	local OID = Screen:GetOwnerId()
 	local Owner = PlayerService:GetUsername(OID)
@@ -22,6 +22,7 @@ local Error, Msg = pcall(function()
 		F = "F";
 	}
 	local UnitType = UnitVariants.F
+	local tickrate = 20 -- unstable runs on 10, stable is 1
 
 --[[
 REMEMBER: INTSTRUMENT UI MUST FACE FORWARD
@@ -284,7 +285,7 @@ L - Ultra down throttled for power presevation
 
 			-- Update the displayed power values
 			lastPower = currentPower
-			local powerLeftTime = math.round(((currentPower / math.round(powerChange)) / 60) * 10) / 10
+			local powerLeftTime = math.round((((currentPower / math.round(powerChange))/tickrate) / 60) * 10) / 10
 
 			Power.Text = math.round(currentPower)
 			barGraphContainer.CanvasSize = UDim2.fromOffset(6 + #barFrames * 28, 0)
@@ -295,7 +296,7 @@ L - Ultra down throttled for power presevation
 			end
 			-- Update Power Left text
 			if powerChange <= 0 then
-				PowerLeft.Text = tostring(math.abs(powerLeftTime))
+				PowerLeft.Text = tonumber(math.abs(powerLeftTime))
 			elseif powerChange > 0 then
 				PowerLeft.Text = "Charging"
 			end
