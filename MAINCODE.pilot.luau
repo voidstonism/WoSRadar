@@ -1,7 +1,5 @@
---CONSOLE/Safe Error 
-local Error, Msg = pcall(function()
-	local Instrument=assert(GetPart("Instrument"),`Part "Instrument" appears to be missing, please check connections.`)
-	local LifeSensor=assert(GetPart("LifeSensor"),`Part "LifeSensor" appears to be missing, please check connections.`)
+local Instrument=assert(GetPart("Instrument"),`Part "Instrument" appears to be missing, please check connections.`)
+local LifeSensor=assert(GetPart("LifeSensor"),`Part "LifeSensor" appears to be missing, please check connections.`)
 	local Screen=assert(GetPart("Screen") or GetPart("TouchScreen") ,`Screen is not found/Screen is of incorrect type, please use part "Screen"`)
 
 	local SecondaryScreen=GetPartFromPort(2,"Screen") or nil
@@ -11,7 +9,7 @@ local Error, Msg = pcall(function()
 
 	local Radius = 2225
 	local Diamater = Radius*2
-	local VersionNum = "v3.9.5"
+	local VersionNum = "v4.0 INDEV"
 	local PlayerService:Players = require("players")
 	local OID = Screen:GetOwnerId()
 	local Owner = PlayerService:GetUsername(OID)
@@ -22,7 +20,6 @@ local Error, Msg = pcall(function()
 		F = "F";
 	}
 	local UnitType = UnitVariants.F
-	local tickrate = 1 -- unstable runs on 10, stable is 1
 
 --[[
 REMEMBER: INTSTRUMENT UI MUST FACE FORWARD
@@ -285,7 +282,7 @@ L - Ultra down throttled for power presevation
 
 			-- Update the displayed power values
 			lastPower = currentPower
-			local powerLeftTime = math.round((((currentPower / math.round(powerChange))/tickrate) / 60) * 10) / 10
+			local powerLeftTime = math.round((((currentPower / math.round(powerChange))) / 60) * 10) / 10
 
 			Power.Text = math.round(currentPower)
 			barGraphContainer.CanvasSize = UDim2.fromOffset(6 + #barFrames * 28, 0)
@@ -371,115 +368,3 @@ L - Ultra down throttled for power presevation
 			CPUTime2 = pilot.getCPUTime()
 		end
 	end
-end)
-
-function GetSuperPart(PartName: string)for port = 1, 20 do local found = GetPartFromPort(port, PartName)if found then return found end end local part = GetPart(PartName)if part then return part end return nil end
-
-local Screen = GetSuperPart("TouchScreen") or GetSuperPart("Screen") or nil
-
-if Screen then
-	local MAINFRAME
-
-	local TerminalTextLabels = {}
-
-	function MAINFRAMINI()
-		MAINFRAME = Screen:CreateElement('ScrollingFrame',{
-			Size = UDim2.fromScale(1, 1);
-			Position = UDim2.fromScale(0, 0);
-			AnchorPoint = Vector2.new(0,0);
-			Rotation = 0;
-			CanvasSize = UDim2.fromScale(0.5,1);
-			AutomaticCanvasSize = Enum.AutomaticSize.Y;
-			BackgroundColor3 = Color3.fromRGB(16, 43, 70)
-		})
-
-		local UIListLayout = Screen:CreateElement("UIListLayout",{SortOrder = Enum.SortOrder.LayoutOrder})
-
-		UIListLayout.Parent = MAINFRAME
-	end
-
-	MAINFRAMINI()
-
-	function Console(TXT:string)
-		if #TerminalTextLabels > 100 then
-			for _, label in pairs(TerminalTextLabels) do
-				label:Remove()
-			end
-			TerminalTextLabels = {}
-		end
-
-		if string.len(TXT) > 1000 then
-			ConsoleWarn("String too long, cannot be displayed")
-			return
-		end
-
-		local label = Screen:CreateElement("TextLabel", {
-			Name = "> "..TXT;
-			Size = UDim2.fromScale(1, 0);
-			Position = UDim2.fromScale(0, 0);
-			AnchorPoint = Vector2.new(0,0);
-			Text = "> "..TXT;
-			TextWrapped = true;
-			Font = "Ubuntu";
-			TextSize = 20;
-			TextXAlignment = Enum.TextXAlignment.Left;
-			TextYAlignment = Enum.TextYAlignment.Top;
-			BackgroundColor3 = Color3.fromRGB(0,0,0);
-			TextColor3 = Color3.fromRGB(216, 237, 255);
-			AutomaticSize = Enum.AutomaticSize.Y;
-			BackgroundTransparency = 1;
-		})
-
-		label.Parent = MAINFRAME
-		table.insert(TerminalTextLabels, label) -- 👈 insert into numeric table
-
-		print(TXT)
-
-		return label -- OPTIONAL
-	end
-
-	function ModifyConsoleLine(TextLabel:TextLabel,Text)
-		TextLabel = Text
-	end
-
-	function ConsoleWarn(TXT:string)
-		if string.len(TXT) > 1000 then
-			ConsoleWarn("String too long, cannot be displayed")
-			return
-		end
-
-		local label = Screen:CreateElement("TextLabel", {
-			Name = "> "..TXT;
-			Size = UDim2.fromScale(1, 0);
-			Position = UDim2.fromScale(0, 0);
-			AnchorPoint = Vector2.new(0,0);
-			Text = "> "..TXT;
-			TextWrapped = true;
-			Font = "Ubuntu";
-			TextSize = 20;
-			TextXAlignment = Enum.TextXAlignment.Left;
-			TextYAlignment = Enum.TextYAlignment.Top;
-			BackgroundColor3 = Color3.fromRGB(0,0,0);
-			TextColor3 = Color3.fromRGB(255, 115, 0);
-			AutomaticSize = Enum.AutomaticSize.Y;
-			BackgroundTransparency = 1;
-		})
-
-		label.Parent = MAINFRAME
-		table.insert(TerminalTextLabels, label) -- 👈 insert into numeric table
-
-		print(TXT)
-	end
-	
-	Console("VTBOS SAFE  MODE V1.0.0")
-	ConsoleWarn("Woops! It apears we had a an error")
-	wait(0.1)
-	ConsoleWarn(Msg)
-	wait(0.1)
-	Console("Shutting down...")
-	wait(1)
-	
-	GetSuperPart("Microcontroller"):Shutdown()
-end
-
-GetSuperPart("Microcontroller"):Shutdown()
