@@ -1,7 +1,7 @@
 This code is to put in the `Microcontroller` Part in the Game Waste of Space
 
 How to set it up:
-Simply weld or cjoint the folling parts DIRECTLY to the Microcontroller:
+Simply weld or cjoint the following parts DIRECTLY to the Microcontroller:
 REQUIRED:
   `Screen`
   `Instrument` (MUST FACE THE DIRECTION OF YOU SHIP)
