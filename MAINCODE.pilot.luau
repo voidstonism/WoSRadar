@@ -1,15 +1,15 @@
 local Instrument=assert(GetPart("Instrument"),`Part "Instrument" appears to be missing, please check connections.`)
 local LifeSensor=assert(GetPart("LifeSensor"),`Part "LifeSensor" appears to be missing, please check connections.`)
-	local Screen=assert(GetPart("Screen") or GetPart("TouchScreen") ,`Screen is not found/Screen is of incorrect type, please use part "Screen"`)
+local Screen=assert(GetPart("Screen") or GetPart("TouchScreen") ,`Screen is not found/Screen is of incorrect type, please use part "Screen"`)
 
-	local SecondaryScreen=GetPartFromPort(2,"Screen") or nil
-	local Sheild = GetPart("EnergyShield") or nil
+local SecondaryScreen=GetPartFromPort(2,"Screen") or nil
+local Sheild = GetPart("EnergyShield") or nil
 
-	Screen:ClearElements()
+Screen:ClearElements()
 
-	local Radius = 2225
-	local Diamater = Radius*2
-	local VersionNum = "v4.0 INDEV"
+local Radius = 2225
+local Diamater = Radius*2
+	local VersionNum = "v4.0"
 	local PlayerService:Players = require("players")
 	local OID = Screen:GetOwnerId()
 	local Owner = PlayerService:GetUsername(OID)
@@ -103,7 +103,7 @@ L - Ultra down throttled for power presevation
 	end
 
 	--Only Game moderators/TestZone mods are here(Discord mods DO NOT COUNT)
-
+	-- Unfortunently the dev/mod list is innacurate as new moderators are added or removed over time, take this list with a grain of
 	local Moderators = {
 		["Vecury"] = true;
 		["iiMurpyh"] = true;
@@ -121,7 +121,7 @@ L - Ultra down throttled for power presevation
 		["Weldify"] = true;
 		["Hexcede"] = true;
 	}
-	local GreenListed={
+	local GreenListed={ -- This is a list of my freinds, I 100% recommend you to change it to your liking
 		["ParagonOfSanguine"] = true;
 		["DemonSecter44"] = true;
 		["orekay2"] = true;
@@ -131,22 +131,18 @@ L - Ultra down throttled for power presevation
 		["Dylanisbeautiful"] = true;
 		["LouisArtOfWar09"]= true;
 		["blueloops9"] = true;
-		["Turtle_Nukes"]= true;
 		["Lodire2O"]= true;
 		["robloxboxertBLOCKED"]= true;
 		["djpablog3"]= true;
 		["alone_baby"]= true;
 		["madgarry105"]= true;
-		["IvanAreEpic"] = true;
 	}
 	local RedListed = { --KILL ON SIGHT LIST NO EXCEPTIONS!
-		["MrLeoMaster23"] = true; --stupid.
-		["xgamerx1234567890_2"]= true; --most annoying of them all
-		["florlarer123"]= true;
-		["WhictArchal"]= true;
-		["RealSkitGamer"]= true;
-		["Hunter07936"]= true;
-		["x_gamesbr2"]= true;
+		["MrLeoMaster23"] = true; -- NEVER SDA
+		["eatsomedust4"] = true; -- NEVER SDA
+		["xgamerx1234567890_2"]= true; -- NEVER AUI
+		["florlarer123"]= true; -- NEVER AUI
+		["GreatBobloxReviews"]= true; -- annoying, attention seeking
 	}
 	local Stan = {
 		["Stan"] = true; -- stan isn't real
