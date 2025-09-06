@@ -11,3 +11,5 @@ OPTIONAL:
   `Screen` - This is a secondary screen connected via a `Port` welded to the `Microcontroller` you can attacth this screen via ethernet or cjoint The screen has to also be 1x1x1 as this is the screen that provides the UI aim assistant beam
 
 You can also configure the Green and Red List to your liking
+
+I recommend forking this and editing the player lists or Tempsettings to your liking
