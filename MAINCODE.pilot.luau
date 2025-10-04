@@ -9,7 +9,7 @@ Screen:ClearElements()
 
 local Radius = 2225
 local Diamater = Radius*2
-	local VersionNum = "v4.1"
+	local VersionNum = "v4.1.1"
 	local PlayerService:Players = require("players")
 	local OID = Screen:GetOwnerId()
 	local Owner = PlayerService:GetUsername(OID)
@@ -290,7 +290,7 @@ L - Ultra down throttled for power presevation
 			-- Update Power Left text
 			if powerChange <= 0 then
 				PowerLeft.Text = tonumber(math.abs(powerLeftTime))
-			elseif powerChange > 0 then
+			elseif powerChange > 0 and PowerLeft.Text ~= "Charging" then
 				PowerLeft.Text = "Charging"
 			end
 		end
