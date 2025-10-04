@@ -284,7 +284,7 @@ L - Ultra down throttled for power presevation
 			barGraphContainer.CanvasSize = UDim2.fromOffset(6 + #barFrames * 28, 0)
 
 			-- Beep if power change is small
-			if math.abs(powerLeftTime) < 5 and powerChange > 0 then
+			if math.abs(powerLeftTime) < 5 and powerChange <= 0 then
 				Beep(1.5)
 			end
 			-- Update Power Left text
