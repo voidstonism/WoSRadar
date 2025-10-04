@@ -9,7 +9,7 @@ Screen:ClearElements()
 
 local Radius = 2225
 local Diamater = Radius*2
-	local VersionNum = "v4.0"
+	local VersionNum = "v4.1"
 	local PlayerService:Players = require("players")
 	local OID = Screen:GetOwnerId()
 	local Owner = PlayerService:GetUsername(OID)
@@ -284,7 +284,7 @@ L - Ultra down throttled for power presevation
 			barGraphContainer.CanvasSize = UDim2.fromOffset(6 + #barFrames * 28, 0)
 
 			-- Beep if power change is small
-			if math.abs(powerLeftTime) < 5 then
+			if math.abs(powerLeftTime) < 5 and powerChange > 0 then
 				Beep(1.5)
 			end
 			-- Update Power Left text
