@@ -300,7 +300,9 @@ L - Ultra down throttled for power presevation
 	ResetButton.MouseButton1Click:Connect(function()
 		Beep(0.5)
 		print(`\nDebug:\nDelayTime: {(CPUTime2 - CPUTime1)/50}\nOwner: {Owner}\nVer{VersionNum}\nTICKRATE: {tickrate}`)
+		Microcontroller:Shutdown()
 	end)
+
 
 	task.spawn(cal)
 
