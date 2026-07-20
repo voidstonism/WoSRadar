@@ -4,7 +4,7 @@ How to set it up:
 Simply weld or cjoint the following parts DIRECTLY to the Microcontroller:
 REQUIRED:
   `Screen`
-  `Instrument` (MUST FACE THE DIRECTION OF YOU SHIP)
+  `Instrument` (MUST FACE THE DIRECTION OF YOUR SHIP)
   `LifeSensor`
 OPTIONAL:
   `EnergyShield` - Monitors E sheild health
